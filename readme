@@ -3,7 +3,13 @@ People Rest Api Program Version 1.0 29/09/2017
 
 Общее описание приложения
 -------------------------
+Данное приложение представляет собой реализацию REST API технологии для взаимодействия с ресурсами веб-сервиса по протоколу http.
 
+Поддерживаемые методы:
+.../people POST
+.../people/id GET
+.../people PUT
+.../people/id DELETE
 
 
 Используемые программные средства:
@@ -25,19 +31,29 @@ $ source rest_app/bin/activate
 
 $ pip install -r requirements.txt
 
-Затем создаем директорию для нашего приложения, переходим в нее, и клонируем проект с сайта github.com:
+Затем переходим в директорию rest_app(корневая директория нашего виртуального окружения) и клонируем проект с сайта github.com:
+
+$ git clone https://github.com/Inframercury/people_rest_ap.git
 
 
+Для начального заполнения базы используем команду:
+
+$ python populate_db.py
 
 Для запуска сервера приложения необходимо использовать следующую команду:
 $python run.py
 
-По умолчанию программа запускается по адресу:
+По умолчанию приложение запускается по адресу:
 127.0.0.1:5000
 
 
+Примеры http запросов
+---------------------
 
-
+curl -i -X GET http://127.0.0.1:5000/people/1
+curl -i -H 'Content-Type: application/json' -X PUT -d '{"id":2,"name":"Vasya","salary":16000,"birthday":"01-06-1993"}' http://127.0.0.1:5000/people
+curl -i -H 'Content-Type: application/json' -X POST -d '{"id":50,"name":"Masha","birthday":"08-08-1990","salary":30000}' http://127.0.0.1:5000/people
+curl -i -X DELETE http://127.0.0.1:5000/people/
 
 
 
