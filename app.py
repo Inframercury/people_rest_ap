@@ -30,7 +30,11 @@ def person_doesnt_exist():
 class PeopleOne(Resource):
     def get(self, person_id):
         session = Session()
-        person = session.query(Person).filter(Person.id == int(person_id)).first()
+        person = None
+        try:
+            person = session.query(Person).filter(Person.id == int(person_id)).first()
+        except:
+            return make_response(jsonify({'error': 'You submitted incorrect data!'}), 400)
         if not person:
             return person_doesnt_exist()
         else:
@@ -60,7 +64,7 @@ class People(Resource):
         try:
             person = Person(id=int(args['id']), name=args['name'], salary=float(args['salary']), birthday=args['birthday'])
         except:
-            return make_response(jsonify({'error':'You submitted incorrect data!'}), 404)
+            return make_response(jsonify({'error':'You submitted incorrect data!'}), 400)
         result = {'id':person.id,'name':person.name,'salary':str(person.salary),'birthday':person.birthday}
         session = Session()
         try:
@@ -74,7 +78,11 @@ class People(Resource):
     def put(self):
         args = parser.parse_args()
         session = Session()
-        person = session.query(Person).filter(Person.id == int(args['id'])).first()
+        person = None
+        try:
+            person = session.query(Person).filter(Person.id == int(args['id'])).first()
+        except:
+            return make_response(jsonify({'error': 'You submitted incorrect data!'}), 400)
         if not person:
             return person_doesnt_exist()
         else:
@@ -85,7 +93,7 @@ class People(Resource):
                 person.salary = args['salary'] if args['salary'] is not None else person.salary
                 person.birthday = args['birthday'] if args['birthday'] is not None else person.birthday
             except:
-                make_response(jsonify({'error': 'You submitted incorrect data!'}), 404)
+                make_response(jsonify({'error': 'You submitted incorrect data!'}), 400)
 
             result = {'id':person.id,'name':person.name,'salary':str(person.salary),'birthday':person.birthday}
             session.add(person)
