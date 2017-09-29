@@ -19,6 +19,11 @@ people = [
     Person(id=3,name='Fedya',salary=40000.00,birthday='01-01-1989'),
     Person(id=4,name='Max',salary=20000.00,birthday='01-01-1990'),
     Person(id=5,name='Masha',salary=17000.00,birthday='01-01-19876'),
+    Person(id=6, name='Andrey', salary=40000.00, birthday='01-01-19871'),
+    Person(id=7,name='Katya',salary=40000.00,birthday='01-01-1989'),
+    Person(id=8,name='Anna',salary=70000.00,birthday='01-01-1990'),
+    Person(id=9,name='Den',salary=17000.00,birthday='01-01-19877'),
+    Person(id=10, name='Alxe', salary=60000.00, birthday='01-01-19888')
 ]
 
 s.bulk_save_objects(people)
